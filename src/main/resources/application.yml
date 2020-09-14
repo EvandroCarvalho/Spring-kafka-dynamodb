@@ -1,0 +1,50 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: spring-dynamodb
+
+---
+spring:
+  profiles:
+  - dev
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic: employee-topic
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      value-converter-schema-registry-url: localhost:8081
+      acks: "all"
+      retries: 10
+      enable:
+        idempotence: true
+      client-id: employee-producer
+#    consumer:
+#      bootstrap-servers: localhost:9092
+#      group-id: group-id
+#      auto-offset-reset: earliest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+#      value-converter-schema-registry-url: localhost:8081
+#      configuration:
+#        schema.registry.url: localhost:8081
+#    listener:
+#      ack-mode: MANUAL_IMMEDIATE
+
+amazon:
+  dynamodb:
+    endpoint: http://localhost:8000/
+    region: us-west-2
+  dynamodb-connection-type: LOCAL
+
+
+---
+spring:
+  profiles:
+    - prd
+aws:
+  credentials:
+    accessKey: access
+    secretKey: secret
+

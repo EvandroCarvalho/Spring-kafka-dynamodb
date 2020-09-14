@@ -1,0 +1,19 @@
+{
+  "type" : "record",
+  "name" : "EmployeeSchema",
+  "namespace" : "com.example.dynamodb.entity",
+  "fields" : [ {
+    "name" : "id",
+    "type" : "string"
+  }, {
+    "name" : "name",
+    "type" : "string"
+  }, {
+    "name" : "cpf",
+    "type" : "string"
+  }, {
+    "name" : "email",
+    "type" : "string",
+    "default": "none"
+  } ]
+}
